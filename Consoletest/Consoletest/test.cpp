@@ -96,34 +96,49 @@ using namespace std;
 //	system("pause");
 //}
 
-class Human {
+//
+
+//基类中        继承方式        子类中
+//public     ＆ public继承 = > public
+//public     ＆ protected继承 = > protected
+//public     ＆ private继承 = > private
+//
+//protected  ＆ public继承 = > protected
+//protected  ＆ protected继承 = > protected
+//protected  ＆ private继承 = > private
+//
+//private    ＆ public继承 = > 子类无权访问
+//private    ＆ protected继承 = > 子类无权访问
+//private    ＆ private继承 = > 子类无权访问
+
+
+class A {
 public:
-	void say() {
-		cout << "说话" << endl;
-	}
-public:
-	int age;
+	char* name;
 };
-class Man : public Human {
+//这里面加了virtual关键字
+class A1 : virtual public A {
+
+};
+//这里面加了virtual关键字
+class A2 : virtual public A {
+
+};
+class B : public A1, public A2 {
 
 };
 
 void main() {
-	//子类
-	Man m1;
-	m1.say();
-	//将子类赋值给父类的引用或指针
-	Human* h_p = &m1;
-	h_p->say();
-	Human &h1 = m1; //引用
-	h1.say();
-	//子类对象初始化父类类型的对象
-	Human h2 = m1;
-	h2.say();
-	//子类对象调用父类的成员
-	m1.Human::say();
-	m1.Human::age = 10;
-	m1.age = 12;
-	cout << m1.age << endl;
+	B b;
+	//如果程序不加virtual关键字就会导致二义性，系统无法辨识哪个类的name属性，会报错
+	b.name = "Hensen";
+	cout << b.name << endl;
+	//这里通过指定父类显示调用是可以的
+	b.A1::name = "Hens";
+	cout << b.name << endl;
+	b.A2::name = "Hense";
+	cout << b.name << endl;
 	system("pause");
+
 }
+
