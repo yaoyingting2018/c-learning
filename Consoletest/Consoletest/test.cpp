@@ -149,54 +149,80 @@ using namespace std;
 //
 //
 //3、引用与指针写法上的差异
+//struct Teacher {
+//	char* name;
+//	int age;
+//};
+////带有结构体指针的写法
+//void myprint(Teacher *t) {
+//	cout << t->name << "," << t->age << endl;
+//	//(*t).name 
+//}
+////带有结构体引用的写法
+//void myprint2(Teacher &t) {
+//	cout << t.name << "," << t.age << endl;
+//	t.age = 21;
+//}
+////指针值交换
+//void swap_1(int *a, int *b) {
+//	int c = 0;
+//	c = *a;
+//	*a = *b;
+//	*b = c;
+//}
+////引用值交换
+//void swap_2(int &a, int &b) {
+//	int c = 0;
+//	c = a;
+//	a = b;
+//	b = c;
+//}
+//
+//void main() {
+//	Teacher t;
+//	t.name = "Hensen";
+//	t.age = 20;
+//	//指针的写法
+//	myprint(&t);
+//	//引用的写法
+//	myprint2(t);
+//
+//	int x = 10;
+//	int y = 20;
+//	//指针的写法
+//	swap_1(&x, &y);
+//	cout << x << endl;
+//	cout << y << endl;
+//	//引用的写法(x,y不变)
+//	swap_2(x, y);
+//	cout << x << endl;
+//	cout << y << endl;
+//
+//	system("pause");
+//}
+
+//把引用作为参数：C++支持把引用作为参数传给函数，这比传一般的参数更安全
+//把引用作为返回值：可以从C++函数中返回引用，就像返回其他数据类型一样
 struct Teacher {
 	char* name;
 	int age;
 };
-//带有结构体指针的写法
-void myprint(Teacher *t) {
-	cout << t->name << "," << t->age << endl;
-	//(*t).name 
+//引用的写法
+void getTeacher(Teacher* &p) {
+	p = (Teacher*)malloc(sizeof(Teacher));
+	p->age = 20;
 }
-//带有结构体引用的写法
-void myprint2(Teacher &t) {
-	cout << t.name << "," << t.age << endl;
-	t.age = 21;
-}
-//指针值交换
-void swap_1(int *a, int *b) {
-	int c = 0;
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-//引用值交换
-void swap_2(int &a, int &b) {
-	int c = 0;
-	c = a;
-	a = b;
-	b = c;
+//二级指针的写法，原本应该这样写，但是已经被引用的写法代替了
+void getTeacher(Teacher **p) {
+	Teacher *tmp = (Teacher*)malloc(sizeof(Teacher));
+	tmp->age = 20;
+	*p = tmp;
 }
 
 void main() {
-	Teacher t;
-	t.name = "Hensen";
-	t.age = 20;
-	//指针的写法
-	myprint(&t);
-	//引用的写法
-	myprint2(t);
-
-	int x = 10;
-	int y = 20;
-	//指针的写法
-	swap_1(&x, &y);
-	cout << x << endl;
-	cout << y << endl;
-	//引用的写法(x,y不变)
-	swap_2(x, y);
-	cout << x << endl;
-	cout << y << endl;
-
+	Teacher *t = NULL;
+	//传递引用的指针t，相当于二级指针
+	getTeacher(&t);
+	cout << t->age << endl;
 	system("pause");
 }
