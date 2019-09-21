@@ -203,26 +203,48 @@ using namespace std;
 
 //把引用作为参数：C++支持把引用作为参数传给函数，这比传一般的参数更安全
 //把引用作为返回值：可以从C++函数中返回引用，就像返回其他数据类型一样
-struct Teacher {
-	char* name;
-	int age;
-};
-//引用的写法
-void getTeacher(Teacher* &p) {
-	p = (Teacher*)malloc(sizeof(Teacher));
-	p->age = 20;
-}
-//二级指针的写法，原本应该这样写，但是已经被引用的写法代替了
-void getTeacher(Teacher **p) {
-	Teacher *tmp = (Teacher*)malloc(sizeof(Teacher));
-	tmp->age = 20;
-	*p = tmp;
+//struct Teacher {
+//	char* name;
+//	int age;
+//};
+////引用的写法
+//void getTeacher(Teacher* &p) {
+//	p = (Teacher*)malloc(sizeof(Teacher));
+//	p->age = 20;
+//}
+////二级指针的写法，原本应该这样写，但是已经被引用的写法代替了
+//void getTeacher(Teacher **p) {
+//	Teacher *tmp = (Teacher*)malloc(sizeof(Teacher));
+//	tmp->age = 20;
+//	*p = tmp;
+//}
+//
+//void main() {
+//	Teacher *t = NULL;
+//	//传递引用的指针t，相当于二级指针
+//	getTeacher(&t);
+//	cout << t->age << endl;
+//	system("pause");
+//}
+
+
+//常引用在方法中的引用
+void myprint(const int &a) {
+	cout << a << endl;
 }
 
 void main() {
-	Teacher *t = NULL;
-	//传递引用的指针t，相当于二级指针
-	getTeacher(&t);
-	cout << t->age << endl;
+	//引用必须要有值，不能为空，下面写法是错误的
+	//const int a;
+	//int &a = NULL;
+
+	//常引用属性使用一
+	int a = 10, b = 9;
+	const int &c = a;
+	myprint(c);
+	//常引用属性使用二
+	const int &d = 70;
+	myprint(d);
 	system("pause");
 }
+
