@@ -112,33 +112,24 @@ using namespace std;
 //private    ＆ private继承 = > 子类无权访问
 
 
-class A {
-public:
-	char* name;
-};
-//这里面加了virtual关键字
-class A1 : virtual public A {
 
-};
-//这里面加了virtual关键字
-class A2 : virtual public A {
 
-};
-class B : public A1, public A2 {
 
-};
+#include "Plane.h"
+#include "Jet.h"
 
-void main() {
-	B b;
-	//如果程序不加virtual关键字就会导致二义性，系统无法辨识哪个类的name属性，会报错
-	b.name = "Hensen";
-	cout << b.name << endl;
-	//这里通过指定父类显示调用是可以的
-	b.A1::name = "Hens";
-	cout << b.name << endl;
-	b.A2::name = "Hense";
-	cout << b.name << endl;
-	system("pause");
-
+//业务函数
+void bizPlay(Plane& p) {
+	p.fly();
+	p.land();
 }
+void main() {
+	Plane p1;
+	bizPlay(p1);
+	//直升飞机
+	Jet p2;
+	bizPlay(p2);
+	system("pause");
+}
+
 
