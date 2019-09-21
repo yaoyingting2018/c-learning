@@ -115,21 +115,88 @@ using namespace std;
 
 
 
-#include "Plane.h"
-#include "Jet.h"
+//#include "Plane.h"
+//#include "Jet.h"
+//
+////业务函数
+//void bizPlay(Plane& p) {
+//	p.fly();
+//	p.land();
+//}
+//void main() {
+//	Plane p1;
+//	bizPlay(p1);
+//	//直升飞机
+//	Jet p2;
+//	bizPlay(p2);
+//	system("pause");
+//}
+//
+//void main() {
+//	int a = 10;
+//	//&是C++中的引用，引用：变量的另外一个别名，共用同个地址
+//	int &b = a;
+//	cout << b << endl;
+//	system("pause");
+//}
 
-//业务函数
-void bizPlay(Plane& p) {
-	p.fly();
-	p.land();
+//2、引用与指针的区别
+//
+//
+//不存在空引用，引用必须连接到一块合法的内存。
+//一旦引用被初始化为一个对象，就不能被指向到另一个对象。指针可以在任何时候指向到另一个对象。
+//引用必须在创建时被初始化。指针可以在任何时间被初始化。
+//
+//
+//3、引用与指针写法上的差异
+struct Teacher {
+	char* name;
+	int age;
+};
+//带有结构体指针的写法
+void myprint(Teacher *t) {
+	cout << t->name << "," << t->age << endl;
+	//(*t).name 
 }
+//带有结构体引用的写法
+void myprint2(Teacher &t) {
+	cout << t.name << "," << t.age << endl;
+	t.age = 21;
+}
+//指针值交换
+void swap_1(int *a, int *b) {
+	int c = 0;
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+//引用值交换
+void swap_2(int &a, int &b) {
+	int c = 0;
+	c = a;
+	a = b;
+	b = c;
+}
+
 void main() {
-	Plane p1;
-	bizPlay(p1);
-	//直升飞机
-	Jet p2;
-	bizPlay(p2);
+	Teacher t;
+	t.name = "Hensen";
+	t.age = 20;
+	//指针的写法
+	myprint(&t);
+	//引用的写法
+	myprint2(t);
+
+	int x = 10;
+	int y = 20;
+	//指针的写法
+	swap_1(&x, &y);
+	cout << x << endl;
+	cout << y << endl;
+	//引用的写法(x,y不变)
+	swap_2(x, y);
+	cout << x << endl;
+	cout << y << endl;
+
 	system("pause");
 }
-
-
