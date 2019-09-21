@@ -229,22 +229,43 @@ using namespace std;
 
 
 //常引用在方法中的引用
-void myprint(const int &a) {
-	cout << a << endl;
-}
+//void myprint(const int &a) {
+//	cout << a << endl;
+//}
+//
+//void main() {
+//	//引用必须要有值，不能为空，下面写法是错误的
+//	//const int a;
+//	//int &a = NULL;
+//
+//	//常引用属性使用一
+//	int a = 10, b = 9;
+//	const int &c = a;
+//	myprint(c);
+//	//常引用属性使用二
+//	const int &d = 70;
+//	myprint(d);
+//	system("pause");
+//}
+//7、引用与指针的大小
+
+
+
+struct Teacher {
+	char name[20];
+	int age;
+};
 
 void main() {
-	//引用必须要有值，不能为空，下面写法是错误的
-	//const int a;
-	//int &a = NULL;
+	Teacher t;
+	//引用
+	Teacher &t1 = t;
+	//指针
+	Teacher *p = &t;
 
-	//常引用属性使用一
-	int a = 10, b = 9;
-	const int &c = a;
-	myprint(c);
-	//常引用属性使用二
-	const int &d = 70;
-	myprint(d);
+	//结果是24，引用相当于变量的别名
+	cout << sizeof(t1) << endl;
+	//结果是4，指针只是存放的地址
+	cout << sizeof(p) << endl;
 	system("pause");
 }
-
